@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProductiviQuest Dashboard</title>
+  <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="header-left">
+        <div class="logo">
+          <span class="logo-icon">🏆</span>
+          <h1>ProductiviQuest Dashboard</h1>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="user-stats">
+          <div class="user-level">
+            <span>Level <span id="headerLevel">1</span></span>
+            <div class="exp-bar">
+              <div class="exp-fill" id="expBar"></div>
+            </div>
+          </div>
+          <button class="theme-toggle" id="themeToggle">🌙</button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="dashboard-nav">
+      <button class="nav-btn active" data-tab="overview">📊 Overview</button>
+      <button class="nav-btn" data-tab="analytics">📈 Analytics</button>
+      <button class="nav-btn" data-tab="achievements">🏆 Achievements</button>
+      <button class="nav-btn" data-tab="goals">🎯 Goals</button>
+      <button class="nav-btn" data-tab="settings">⚙️ Settings</button>
+    </nav>
+
+    <main class="dashboard-content">
+      <!-- Overview Tab -->
+      <section class="tab-content active" id="overview">
+        <div class="overview-grid">
+          <div class="overview-card score-card">
+            <h3>Today's Score</h3>
+            <div class="score-display">
+              <div class="score-circle-large">
+                <div class="score-progress-large" id="todayScore">
+                  <span class="score-number">0</span>
+                </div>
+              </div>
+            </div>
+            <div class="score-breakdown">
+              <div class="breakdown-item productive">
+                <span class="breakdown-label">Productive</span>
+                <span class="breakdown-value" id="todayProductive">0h</span>
+              </div>
+              <div class="breakdown-item distracting">
+                <span class="breakdown-label">Distracting</span>
+                <span class="breakdown-value" id="todayDistracting">0h</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="overview-card streak-card">
+            <h3>Streak & Level</h3>
+            <div class="streak-display">
+              <div class="streak-counter">
+                <span class="streak-number" id="streakDisplay">0</span>
+                <span class="streak-label">Day Streak</span>
+              </div>
+              <div class="level-display">
+                <span class="level-number" id="levelDisplay">1</span>
+                <span class="level-label">Level</span>
+              </div>
+            </div>
+            <div class="level-progress">
+              <div class="level-progress-bar">
+                <div class="level-progress-fill" id="levelProgress"></div>
+              </div>
+              <span class="level-progress-text" id="levelProgressText">0 / 1000 XP</span>
+            </div>
+          </div>
+
+          <div class="overview-card quick-stats">
+            <h3>Quick Stats</h3>
+            <div class="quick-stats-grid">
+              <div class="quick-stat">
+                <span class="quick-stat-value" id="totalSites">0</span>
+                <span class="quick-stat-label">Sites Visited</span>
+              </div>
+              <div class="quick-stat">
+                <span class="quick-stat-value" id="avgSession">0m</span>
+                <span class="quick-stat-label">Avg Session</span>
+              </div>
+              <div class="quick-stat">
+                <span class="quick-stat-value" id="topCategory">-</span>
+                <span class="quick-stat-label">Top Category</span>
+              </div>
+              <div class="quick-stat">
+                <span class="quick-stat-value" id="focusTime">0m</span>
+                <span class="quick-stat-label">Longest Focus</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="overview-card recent-activity">
+            <h3>Recent Activity</h3>
+            <div class="activity-list" id="recentActivity">
+              <div class="activity-empty">No activity yet today</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analytics Tab -->
+      <section class="tab-content" id="analytics">
+        <div class="analytics-grid">
+          <div class="chart-card">
+            <h3>Weekly Productivity Trend</h3>
+            <canvas id="weeklyChart" width="400" height="200"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Category Distribution</h3>
+            <canvas id="categoryChart" width="400" height="200"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Daily Patterns</h3>
+            <canvas id="patternsChart" width="400" height="200"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Top Websites</h3>
+            <div class="websites-list" id="topWebsites">
+              <div class="website-item">
+                <span class="website-name">No data available</span>
+                <span class="website-time">0m</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Achievements Tab -->
+      <section class="tab-content" id="achievements">
+        <div class="achievements-header">
+          <h2>Your Achievements</h2>
+          <div class="achievements-stats">
+            <span id="achievementCount">0</span> of <span id="totalAchievements">12</span> unlocked
+          </div>
+        </div>
+        <div class="achievements-grid" id="achievementsGrid">
+          <!-- Achievement items will be populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Goals Tab -->
+      <section class="tab-content" id="goals">
+        <div class="goals-header">
+          <h2>Productivity Goals</h2>
+          <button class="btn btn-primary" id="addGoal">Add New Goal</button>
+        </div>
+        <div class="goals-grid">
+          <div class="goal-card">
+            <h3>Daily Productive Hours</h3>
+            <div class="goal-input">
+              <input type="number" id="dailyGoal" min="1" max="16" value="6">
+              <span>hours</span>
+            </div>
+            <div class="goal-progress">
+              <div class="goal-progress-bar">
+                <div class="goal-progress-fill" id="dailyGoalProgress"></div>
+              </div>
+              <span class="goal-progress-text" id="dailyGoalText">0 / 6 hours</span>
+            </div>
+          </div>
+          
+          <div class="goal-card">
+            <h3>Max Distracting Hours</h3>
+            <div class="goal-input">
+              <input type="number" id="distractingLimit" min="0" max="8" value="2">
+              <span>hours</span>
+            </div>
+            <div class="goal-progress warning">
+              <div class="goal-progress-bar">
+                <div class="goal-progress-fill" id="distractingProgress"></div>
+              </div>
+              <span class="goal-progress-text" id="distractingText">0 / 2 hours</span>
+            </div>
+          </div>
+
+          <div class="goal-card">
+            <h3>Focus Session Length</h3>
+            <div class="goal-input">
+              <input type="number" id="focusGoal" min="5" max="120" value="25">
+              <span>minutes</span>
+            </div>
+            <div class="goal-description">
+              Minimum time to spend on productive sites for it to count as a focus session.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Tab -->
+      <section class="tab-content" id="settings">
+        <div class="settings-header">
+          <h2>Settings</h2>
+        </div>
+        <div class="settings-grid">
+          <div class="setting-card">
+            <h3>Notifications</h3>
+            <div class="setting-group">
+              <label class="setting-item">
+                <input type="checkbox" id="notificationsEnabled">
+                <span class="setting-label">Enable achievement notifications</span>
+              </label>
+              <label class="setting-item">
+                <input type="checkbox" id="soundEnabled">
+                <span class="setting-label">Enable notification sounds</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-card">
+            <h3>Website Categories</h3>
+            <div class="category-management">
+              <div class="category-section">
+                <h4>Productive Sites</h4>
+                <div class="category-tags" id="productiveTags"></div>
+                <div class="add-category">
+                  <input type="text" id="productiveInput" placeholder="Add productive site...">
+                  <button class="btn btn-sm" id="addProductive">Add</button>
+                </div>
+              </div>
+              
+              <div class="category-section">
+                <h4>Distracting Sites</h4>
+                <div class="category-tags" id="distractingTags"></div>
+                <div class="add-category">
+                  <input type="text" id="distractingInput" placeholder="Add distracting site...">
+                  <button class="btn btn-sm" id="addDistracting">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="setting-card">
+            <h3>Data Management</h3>
+            <div class="data-actions">
+              <button class="btn btn-secondary" id="exportDataBtn">Export All Data</button>
+              <button class="btn btn-secondary" id="importDataBtn">Import Data</button>
+              <button class="btn btn-danger" id="resetDataBtn">Reset All Data</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="scripts/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProductiviQuest</title>
+  <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="logo">
+        <div class="logo-icon">🏆</div>
+        <h1>ProductiviQuest</h1>
+      </div>
+      <div class="level-badge">
+        <span class="level-text">Level</span>
+        <span class="level-number" id="userLevel">1</span>
+      </div>
+    </header>
+
+    <div class="score-section">
+      <div class="score-circle">
+        <div class="score-progress" id="scoreProgress">
+          <div class="score-value" id="scoreValue">0</div>
+          <div class="score-label">Productivity Score</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card productive">
+        <div class="stat-icon">📈</div>
+        <div class="stat-content">
+          <div class="stat-value" id="productiveTime">0h 0m</div>
+          <div class="stat-label">Productive</div>
+        </div>
+      </div>
+      
+      <div class="stat-card distracting">
+        <div class="stat-icon">📱</div>
+        <div class="stat-content">
+          <div class="stat-value" id="distractingTime">0h 0m</div>
+          <div class="stat-label">Distracting</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-item">
+        <div class="progress-header">
+          <span>Daily Goal Progress</span>
+          <span id="goalProgress">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="goalProgressBar"></div>
+        </div>
+      </div>
+
+      <div class="progress-item">
+        <div class="progress-header">
+          <span>Current Streak</span>
+          <span id="streakCount">0 days</span>
+        </div>
+        <div class="streak-indicator">
+          <div class="streak-flames" id="streakFlames">🔥</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="achievements-preview">
+      <h3>Recent Achievements</h3>
+      <div class="achievements-list" id="achievementsList">
+        <div class="no-achievements">Start browsing to earn achievements!</div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary" id="openDashboard">
+        <span class="btn-icon">📊</span>
+        View Dashboard
+      </button>
+      <button class="btn btn-secondary" id="openSettings">
+        <span class="btn-icon">⚙️</span>
+        Settings
+      </button>
+    </div>
+
+    <div class="quick-actions">
+      <button class="quick-btn" id="startFocusMode" title="Start Focus Mode">
+        <span>🎯</span>
+      </button>
+      <button class="quick-btn" id="takeBreak" title="Take a Break">
+        <span>☕</span>
+      </button>
+      <button class="quick-btn" id="exportData" title="Export Data">
+        <span>💾</span>
+      </button>
+    </div>
+  </div>
+
+  <script src="scripts/popup.js"></script>
+</body>
+</html>
